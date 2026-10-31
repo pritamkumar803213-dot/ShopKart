@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#f3f3f3;
+padding:20px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.total{
+font-size:24px;
+font-weight:bold;
+margin:20px 0;
+color:#b12704;
+}
+
+button{
+width:100%;
+padding:15px;
+background:green;
+color:white;
+border:none;
+cursor:pointer;
+font-size:18px;
+border-radius:5px;
+}
+
+button:hover{
+background:darkgreen;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Checkout</h1>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name">
+
+<input
+type="text"
+id="mobile"
+placeholder="Mobile Number">
+
+<textarea
+id="address"
+rows="4"
+placeholder="Delivery Address"></textarea>
+
+<div
+class="total"
+id="totalPrice">
+Total: ₹0
+</div>
+
+<button onclick="placeOrder()">
+Place Order
+</button>
+
+</div>
+
+<script>
+
+let cart =
+JSON.parse(localStorage.getItem("cart"))
+|| [];
+
+let total = 0;
+
+cart.forEach(item=>{
+total += item.price;
+});
+
+document.getElementById("totalPrice")
+.innerHTML =
+"Total: ₹" + total;
+
+function placeOrder(){
+
+let name =
+document.getElementById("name").value;
+
+let mobile =
+document.getElementById("mobile").value;
+
+let address =
+document.getElementById("address").value;
+
+if(
+name==="" ||
+mobile==="" ||
+address===""
+){
+
+alert("Please Fill All Fields");
+return;
+
+}
+
+let order = {
+
+name:name,
+mobile:mobile,
+address:address,
+total:total,
+items:cart,
+date:new Date().toLocaleString()
+
+};
+
+let orders =
+JSON.parse(
+localStorage.getItem("orders")
+) || [];
+
+orders.push(order);
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+localStorage.removeItem("cart");
+
+alert(
+"🎉 Order Placed Successfully!"
+);
+
+window.location.href =
+"index.html";
+
+}
+
+</script>
+
+</body>
+</html>

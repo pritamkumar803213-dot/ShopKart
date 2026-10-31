@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Signup</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f3f3f3;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:30px;
+width:350px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#ff9900;
+border:none;
+cursor:pointer;
+font-size:16px;
+}
+
+a{
+display:block;
+text-align:center;
+margin-top:15px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input
+type="text"
+id="username"
+placeholder="Enter Username">
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email">
+
+<input
+type="password"
+id="password"
+placeholder="Enter Password">
+
+<button onclick="signup()">
+Create Account
+</button>
+
+<a href="login.html">
+Already have an account? Login
+</a>
+
+</div>
+
+<script>
+
+function signup(){
+
+let username =
+document.getElementById("username").value;
+
+let email =
+document.getElementById("email").value;
+
+let password =
+document.getElementById("password").value;
+
+if(
+username==="" ||
+email==="" ||
+password===""
+){
+
+alert("Please fill all fields");
+return;
+
+}
+
+localStorage.setItem(
+"username",
+username
+);
+
+localStorage.setItem(
+"email",
+email
+);
+
+localStorage.setItem(
+"password",
+password
+);
+
+alert("Account Created Successfully");
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+</body>
+</html>
